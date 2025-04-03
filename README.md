@@ -2,7 +2,7 @@
 
 ```bash
 mkdir -p ~/ros2_ws/src && cd ~/ros2_ws/src
-ros2 pkg create --build-type ament_python --node-name my_node my_package
+ros2 pkg create --build-type ament_cmake --node-name my_node my_package
 cd ~/ros2_ws
 colcon build
 source install/local_setup.bash
