@@ -2,12 +2,105 @@
 
 ```bash
 mkdir -p ~/ros2_ws/src && cd ~/ros2_ws/src
-ros2 pkg create --build-type ament_cmake --node-name my_node my_package
+ros2 pkg create --build-type ament_cmake --node-name my_node my_package --dependencies ament_cmake_python rclpy
 cd ~/ros2_ws
 colcon build
 source install/local_setup.bash
 ros2 run my_package my_node
 ```
+
+> **Note**: The cmake_python structure (using ament_cmake + Python) is much easier to maintain compared to pure Python packages and offers more flexibility when you eventually need to mix languages. While this structure supports both C++ and Python components in the same package, in this course we will be focusing exclusively on Python-based development.
+
+### Modifying CMakeLists.txt for Python-Only Package
+
+After creating a new package with `ros2 pkg create`, you'll get a C++-focused CMakeLists.txt. To make it Python-focused like our demos package, follow these steps:
+
+### Package Structure (Python-Only)
+
+For a Python ROS 2 package named `my_package`:
+
+```
+my_package/
+├── CMakeLists.txt         # Modified build configuration
+├── package.xml            # Package metadata
+├── src/                   # Source directory for Python code
+│   ├── __init__.py        # Makes src/ a Python package
+│   ├── node.py            # Python nodes at root of src/
+│   └── examples/          # Optional subdirectories for organization
+│       ├── __init__.py    # Makes examples a subpackage
+│       └── example_node.py # Example Python nodes
+```
+
+### Modifying the Auto-Generated CMakeLists.txt
+
+1. Keep the required dependencies, and **remove** all the C++ build parts:
+
+```cmake
+cmake_minimum_required(VERSION 3.5)
+project(my_package)
+
+# Find required packages
+find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
+find_package(rclpy REQUIRED)
+
+# REMOVE all of these C++ parts:
+# - add_executable()
+# - target_include_directories()
+# - target_compile_features()
+# - ament_target_dependencies() for the C++ executable
+# - install(TARGETS my_node...)
+```
+
+2. Add Python module installation:
+
+```cmake
+# Install Python modules
+ament_python_install_package(src)
+
+# Install Python executables
+install(PROGRAMS
+  src/node.py
+  # Add other Python scripts as needed
+  src/examples/example_node.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+```
+
+3. Keep the testing section and ament_package() call.
+
+### Setting Up Python Files
+
+1. Create the Python package structure:
+
+```bash
+mkdir -p src
+touch src/__init__.py
+# For subfolders:
+mkdir -p src/examples
+touch src/examples/__init__.py
+```
+
+2. Create Python nodes with executable permissions:
+
+```bash
+# Basic node
+touch src/node.py
+chmod +x src/node.py
+# Example node
+touch src/examples/example_node.py
+chmod +x src/examples/example_node.py
+```
+
+3. Add a shebang line at the top of each Python file:
+
+```python
+#!/usr/bin/env python3
+
+# Rest of your Python code...
+```
+
+This creates a Python-focused ROS 2 package similar to our demos package.
 
 ## **What Is This?**
 
