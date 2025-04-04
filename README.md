@@ -1,3 +1,7 @@
+## Whats this?
+A demo of a talker and listner setup in ROS2 using a publisher and subscriber. The talker publish messages to a topic and a subscriber reads these messages and prints it in the terminal. We start by making a directory using mkdir, move into it and then create the ROS2 package using ros2 pkg create. In the package, we create the empty file --node-name my_node, and the package name is my_package. You can see the file structure under Package Structure section below. 
+To start, run the commands in the First package section below.
+
 ## First package
 
 ```bash
@@ -9,7 +13,7 @@ source install/local_setup.bash
 ros2 run my_package my_node
 ```
 
-> **Note**: The cmake_python structure (using ament_cmake + Python) is much easier to maintain compared to pure Python packages and offers more flexibility when you eventually need to mix languages. While this structure supports both C++ and Python components in the same package, in this course we will be focusing exclusively on Python-based development.
+> **Note**: The cmake_python structure (using --build-type ament_cmake + Python) is much easier to maintain compared to pure Python packages and offers more flexibility when you eventually need to mix languages. While this structure supports both C++ and Python components in the same package, in this course we will be focusing exclusively on Python-based development.
 
 ### Modifying CMakeLists.txt for Python-Only Package
 
