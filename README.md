@@ -1,5 +1,5 @@
 ## Demos
-A short guide about packages and a few examples, the talker and listener nodes demo is highly interesting for Lab 1. The talker publish messages to a topic and a subscriber reads these messages and prints it in the terminal. 
+A short guide about packages and a few examples starting in the 'What is this section?', the talker and listener nodes demo is highly interesting for Lab 1. The talker publish messages to a topic and a subscriber reads these messages and prints it in the terminal. 
 ## First package
 We start by making a directory using mkdir, move into it and then create the ROS2 package using ros2 pkg create. In the package, we create the empty file --node-name my_node, and the package name is my_package. You can see the file structure under Package Structure section below. 
 To start, run the commands in the First package section below.
