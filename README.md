@@ -122,10 +122,10 @@ This package contains the following ROS 2 nodes:
 
 ## **Build**
 
-Run this command to build the package:
+While in your workspace root, run this command to build the package:
 
 ```bash
-colcon build --packages-select demos
+colcon build 
 ```
 
 ## **Run**
