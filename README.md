@@ -7,7 +7,7 @@ To start, run the commands in the First package section below.
 
 ```bash
 mkdir -p ~/ros2_ws/src && cd ~/ros2_ws/src
-ros2 pkg create --build-type ament_cmake --node-name my_node my_package --dependencies ament_cmake_python rclpy
+ros2 pkg create --build-type ament_cmake my_package --dependencies ament_cmake_python rclpy
 cd ~/ros2_ws
 colcon build
 source install/local_setup.bash
